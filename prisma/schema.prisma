@@ -1,0 +1,51 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Admin {
+  id            String   @id @default(cuid())
+  username      String   @unique
+  password      String
+  createdAt     DateTime @default(now())
+}
+
+model OrderBooker {
+  id        String   @id @default(cuid())
+  name      String
+  code      String   @unique
+  sales     Sale[]
+  targets   Target[]
+  createdAt DateTime @default(now())
+}
+
+model Sale {
+  id            String      @id @default(cuid())
+  amount        Float
+  date          DateTime
+  orderBookerId String
+  orderBooker   OrderBooker @relation(fields: [orderBookerId], references: [id], onDelete: Cascade)
+}
+
+model Target {
+  id            String      @id @default(cuid())
+  amount        Float
+  month         Int         // 1-12
+  year          Int
+  orderBookerId String
+  orderBooker   OrderBooker @relation(fields: [orderBookerId], references: [id], onDelete: Cascade)
+  @@unique([orderBookerId, month, year])
+}
+
+model StockPdf {
+  id        String   @id @default(cuid())
+  title     String
+  url       String
+  createdAt DateTime @default(now())
+}

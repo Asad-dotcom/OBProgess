@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: oklch(0.141 0.005 285.823);
+  --color-foreground: oklch(0.985 0 0);
+
+  --color-card: oklch(0.181 0.005 285.823);
+  --color-card-foreground: oklch(0.985 0 0);
+
+  --color-popover: oklch(0.141 0.005 285.823);
+  --color-popover-foreground: oklch(0.985 0 0);
+
+  --color-primary: oklch(0.627 0.265 303.891);
+  --color-primary-foreground: oklch(0.985 0 0);
+
+  --color-secondary: oklch(0.269 0.005 285.823);
+  --color-secondary-foreground: oklch(0.985 0 0);
+
+  --color-muted: oklch(0.269 0.005 285.823);
+  --color-muted-foreground: oklch(0.708 0 0);
+
+  --color-accent: oklch(0.269 0.005 285.823);
+  --color-accent-foreground: oklch(0.985 0 0);
+
+  --color-destructive: oklch(0.396 0.141 25.723);
+  --color-destructive-foreground: oklch(0.637 0.237 25.331);
+
+  --color-border: oklch(0.269 0.005 285.823);
+  --color-input: oklch(0.269 0.005 285.823);
+  --color-ring: oklch(0.439 0 0);
+
+  --color-chart-1: oklch(0.488 0.243 6.43);
+  --color-chart-2: oklch(0.696 0.17 162.48);
+  --color-chart-3: oklch(0.769 0.188 70.08);
+  --color-chart-4: oklch(0.627 0.265 303.891);
+  --color-chart-5: oklch(0.645 0.246 16.439);
+
+  --radius-lg: 0.5rem;
+  --radius-md: calc(0.5rem - 2px);
+  --radius-sm: calc(0.5rem - 4px);
+
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  --animate-slide-up: slide-up 0.8s ease-out;
+  --animate-slide-in-left: slide-in-left 0.6s ease-out;
+  --animate-fade-in: fade-in 1s ease-out;
+  --animate-count-up: count-up 2s ease-out;
+  --animate-shimmer: shimmer 2.5s linear infinite;
+  --animate-shake: shake 0.2s ease-in-out 0s 2;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.15); }
+  50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.35); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-in-left {
+  from { opacity: 0; transform: translateX(-30px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+.glass-morphism {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10;
+}
+
+.premium-gradient {
+  background: linear-gradient(135deg, oklch(0.627 0.265 303.891), oklch(0.488 0.243 6.43));
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, oklch(0.627 0.265 303.891), oklch(0.769 0.188 70.08), oklch(0.488 0.243 6.43));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-glow {
+  background: radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 30%), rgba(139, 92, 246, 0.08), transparent 40%);
+}
+
+.grid-pattern {
+  background-image: 
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.card-shine {
+  position: relative;
+  overflow: hidden;
+}
+.card-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.03), transparent);
+  transition: left 0.5s ease;
+}
+.card-shine:hover::before {
+  left: 100%;
+}
+
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
