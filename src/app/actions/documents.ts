@@ -60,7 +60,12 @@ export async function uploadStockPdf(formData: FormData) {
 }
 
 export async function getStockPdfs() {
-  return await prisma.stockPdf.findMany({
-    orderBy: { createdAt: 'desc' }
-  });
+  try {
+    return await prisma.stockPdf.findMany({
+      orderBy: { createdAt: 'desc' }
+    });
+  } catch (error) {
+    console.error("Prisma Error in getStockPdfs:", error);
+    return []; // Return empty list to prevent crash
+  }
 }

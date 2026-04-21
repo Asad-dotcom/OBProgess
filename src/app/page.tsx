@@ -9,6 +9,7 @@ import {
   Award, Activity, Clock, Star
 } from "lucide-react";
 import Link from "next/link";
+import SentimentGauge from "../components/SentimentGauge";
 
 export default async function PublicDashboard() {
   const [{ performance, currentMonth, currentYear }, stockPdfs] = await Promise.all([
@@ -130,48 +131,57 @@ export default async function PublicDashboard() {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {/* Total Sales Card */}
-            <div className="glass-morphism rounded-2xl p-6 relative overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 card-shine animate-slide-up stagger-1">
-              <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-colors" />
-              <div className="relative">
-                <div className="p-3 w-fit rounded-xl bg-emerald-500/10 mb-4 group-hover:scale-110 transition-transform">
-                  <TrendingUp size={24} className="text-emerald-500" />
+          <div className="flex flex-col lg:flex-row gap-8 mb-12">
+            {/* New Sentiment Gauge Section */}
+            <div className="w-full lg:w-1/3 animate-slide-up">
+              <SentimentGauge value={overallAchievement} className="h-full min-h-[300px]" />
+            </div>
+
+            <div className="w-full lg:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {/* Total Sales Card */}
+              <div className="glass-morphism rounded-2xl p-6 relative overflow-hidden group hover:border-emerald-500/30 transition-all duration-500 card-shine animate-slide-up stagger-1">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-emerald-500/10 rounded-full blur-2xl group-hover:bg-emerald-500/20 transition-colors" />
+                <div className="relative">
+                  <div className="p-3 w-fit rounded-xl bg-emerald-500/10 mb-4 group-hover:scale-110 transition-transform">
+                    <TrendingUp size={24} className="text-emerald-500" />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Total Sales</p>
+                  <h3 className="text-3xl font-black mt-2 text-foreground leading-none font-mono">
+                    PKR {totalSales.toLocaleString()}
+                  </h3>
+                  <div className="mt-4 pt-4 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+                      Current month revenue
+                    </p>
+                  </div>
                 </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Total Sales</p>
-                <h3 className="text-3xl font-black mt-2 text-foreground leading-none font-mono">
-                  PKR {totalSales.toLocaleString()}
-                </h3>
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    Current month revenue
-                  </p>
+              </div>
+
+              {/* Monthly Target Card */}
+              <div className="glass-morphism rounded-2xl p-6 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 card-shine animate-slide-up stagger-2">
+                <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors" />
+                <div className="relative">
+                  <div className="p-3 w-fit rounded-xl bg-primary/10 mb-4 group-hover:scale-110 transition-transform">
+                    <Target size={24} className="text-primary" />
+                  </div>
+                  <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Monthly Target</p>
+                  <h3 className="text-3xl font-black mt-2 text-foreground leading-none font-mono">
+                    PKR {totalTarget.toLocaleString()}
+                  </h3>
+                  <div className="mt-4 pt-4 border-t border-border/50">
+                    <p className="text-xs text-muted-foreground flex items-center gap-1">
+                      <span className="h-1.5 w-1.5 rounded-full bg-primary" />
+                      Combined team goal
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Monthly Target Card */}
-            <div className="glass-morphism rounded-2xl p-6 relative overflow-hidden group hover:border-primary/30 transition-all duration-500 card-shine animate-slide-up stagger-2">
-              <div className="absolute -right-4 -top-4 w-24 h-24 bg-primary/10 rounded-full blur-2xl group-hover:bg-primary/20 transition-colors" />
-              <div className="relative">
-                <div className="p-3 w-fit rounded-xl bg-primary/10 mb-4 group-hover:scale-110 transition-transform">
-                  <Target size={24} className="text-primary" />
-                </div>
-                <p className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-foreground">Monthly Target</p>
-                <h3 className="text-3xl font-black mt-2 text-foreground leading-none font-mono">
-                  PKR {totalTarget.toLocaleString()}
-                </h3>
-                <div className="mt-4 pt-4 border-t border-border/50">
-                  <p className="text-xs text-muted-foreground flex items-center gap-1">
-                    <span className="h-1.5 w-1.5 rounded-full bg-primary" />
-                    Combined team goal
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Achievement Card */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Achievement Card (Previously was here, kept for layout but updated) */}
             <div className="glass-morphism rounded-2xl p-6 relative overflow-hidden group hover:border-amber-500/30 transition-all duration-500 card-shine animate-slide-up stagger-3">
               <div className="absolute -right-4 -top-4 w-24 h-24 bg-amber-500/10 rounded-full blur-2xl group-hover:bg-amber-500/20 transition-colors" />
               <div className="relative">

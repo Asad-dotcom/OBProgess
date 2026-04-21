@@ -1,7 +1,18 @@
 import { getSales, createSale, deleteSale } from "../../actions/sales";
 import { getOrderBookers } from "../../actions/orderBookers";
 import SaleEntryForm from "../../../components/SaleEntryForm";
-import { History, TrendingUp, Trash2 } from "lucide-react";
+import QuickAddSale from "../../../components/QuickAddSale";
+import { History, Plus, Trash2 } from "lucide-react";
+
+type SaleRow = {
+  id: string;
+  amount: number;
+  date: Date | string;
+  orderBooker: {
+    name: string;
+    code: string;
+  };
+};
 
 export default async function SalesPage() {
   const [sales, orderBookers] = await Promise.all([
@@ -12,8 +23,19 @@ export default async function SalesPage() {
   return (
     <div className="space-y-10">
       <div>
-        <h1 className="text-3xl font-extrabold tracking-tight">Sales Tracking</h1>
-        <p className="text-muted-foreground mt-2">Log and monitor daywise sales entries</p>
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div>
+            <h1 className="text-3xl font-extrabold tracking-tight">Sales Tracking</h1>
+            <p className="text-muted-foreground mt-2">Log and monitor daywise sales entries</p>
+          </div>
+          <a
+            href="#add-sale-form"
+            className="inline-flex items-center gap-2 premium-gradient px-4 py-2.5 rounded-lg text-white font-semibold shadow-lg hover:opacity-90 transition-opacity"
+          >
+            <Plus size={18} />
+            Add Sale
+          </a>
+        </div>
       </div>
 
       <SaleEntryForm orderBookers={orderBookers} action={createSale} />
@@ -31,6 +53,7 @@ export default async function SalesPage() {
                 <th className="px-6 py-4">Booker</th>
                 <th className="px-6 py-4">Amount</th>
                 <th className="px-6 py-4">Date</th>
+                <th className="px-6 py-4 text-center">Add More</th>
                 <th className="px-6 py-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -42,7 +65,7 @@ export default async function SalesPage() {
                   </td>
                 </tr>
               ) : (
-                sales.map((sale: any) => (
+                sales.map((sale: SaleRow) => (
                   <tr key={sale.id} className="hover:bg-white/5 transition-colors group">
                     <td className="px-6 py-4">
                       <div className="font-semibold text-foreground">{sale.orderBooker.name}</div>
@@ -53,6 +76,11 @@ export default async function SalesPage() {
                     </td>
                     <td className="px-6 py-4 text-sm text-muted-foreground">
                       {new Date(sale.date).toLocaleDateString(undefined, { dateStyle: 'medium' })}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex justify-center">
+                        <QuickAddSale saleId={sale.id} />
+                      </div>
                     </td>
                     <td className="px-6 py-4 text-right">
                       <form action={async () => {

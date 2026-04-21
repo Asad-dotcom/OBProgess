@@ -11,7 +11,7 @@ interface SaleEntryFormProps {
 
 export default function SaleEntryForm({ orderBookers, action }: SaleEntryFormProps) {
   return (
-    <div className="glass-morphism rounded-xl p-6 shadow-2xl">
+    <div id="add-sale-form" className="glass-morphism rounded-xl p-6 shadow-2xl">
       <div className="flex items-center gap-3 mb-6">
         <div className="p-2 bg-primary/10 rounded-lg text-primary">
           <TrendingUp size={24} />
@@ -70,7 +70,7 @@ export default function SaleEntryForm({ orderBookers, action }: SaleEntryFormPro
               name="date"
               required
               defaultValue={new Date().toISOString().split('T')[0]}
-              className="w-full bg-accent/50 border border-border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all [color-scheme:dark]"
+              className="w-full bg-accent/50 border border-border rounded-lg px-4 py-2.5 outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all scheme-dark"
             />
           </div>
         </div>
@@ -98,7 +98,7 @@ function SubmitButton() {
       ) : (
         <>
           <TrendingUp size={20} />
-          Record Sale
+          Add Sale
         </>
       )}
     </button>
