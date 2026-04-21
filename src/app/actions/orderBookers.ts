@@ -18,7 +18,8 @@ export async function createOrderBooker(formData: FormData) {
         code: code.toUpperCase(),
       },
     });
-    revalidatePath("/dashboard/order-bookers");
+    revalidatePath("/admin/order-bookers");
+    revalidatePath("/admin");
     revalidatePath("/");
   } catch (error: any) {
     if (error.code === 'P2002') {

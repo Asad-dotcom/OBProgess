@@ -50,7 +50,7 @@ export async function uploadStockPdf(formData: FormData) {
       },
     });
 
-    revalidatePath("/dashboard");
+    revalidatePath("/admin");
     revalidatePath("/");
     return { success: true };
   } catch (error) {

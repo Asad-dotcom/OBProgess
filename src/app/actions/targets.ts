@@ -32,8 +32,9 @@ export async function upsertTarget(formData: FormData) {
         amount,
       },
     });
-    revalidatePath("/dashboard/targets");
-    revalidatePath("/dashboard");
+    revalidatePath("/admin/targets");
+    revalidatePath("/admin/reports");
+    revalidatePath("/admin");
     revalidatePath("/");
   } catch (error) {
     throw new Error("Failed to assign target.");

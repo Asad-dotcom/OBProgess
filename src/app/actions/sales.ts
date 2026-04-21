@@ -20,8 +20,9 @@ export async function createSale(formData: FormData) {
         date,
       },
     });
-    revalidatePath("/dashboard/sales");
-    revalidatePath("/dashboard");
+    revalidatePath("/admin/sales");
+    revalidatePath("/admin/reports");
+    revalidatePath("/admin");
     revalidatePath("/");
   } catch (error) {
     throw new Error("Failed to log sale.");
@@ -42,7 +43,8 @@ export async function getSales(limit = 10) {
 
 export async function deleteSale(id: string) {
   await prisma.sale.delete({ where: { id } });
-  revalidatePath("/dashboard/sales");
-  revalidatePath("/dashboard");
+  revalidatePath("/admin/sales");
+  revalidatePath("/admin/reports");
+  revalidatePath("/admin");
   revalidatePath("/");
 }
