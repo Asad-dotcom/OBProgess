@@ -22,6 +22,7 @@ export async function createSale(formData: FormData) {
     });
     revalidatePath("/dashboard/sales");
     revalidatePath("/dashboard");
+    revalidatePath("/");
   } catch (error) {
     throw new Error("Failed to log sale.");
   }
@@ -43,4 +44,5 @@ export async function deleteSale(id: string) {
   await prisma.sale.delete({ where: { id } });
   revalidatePath("/dashboard/sales");
   revalidatePath("/dashboard");
+  revalidatePath("/");
 }

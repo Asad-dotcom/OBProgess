@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { getDashboardData } from "../lib/calculations";
 import PerformanceTable from "../components/PerformanceTable";
 import { getStockPdfs } from "./actions/documents";

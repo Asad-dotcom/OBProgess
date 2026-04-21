@@ -19,6 +19,7 @@ export async function createOrderBooker(formData: FormData) {
       },
     });
     revalidatePath("/dashboard/order-bookers");
+    revalidatePath("/");
   } catch (error: any) {
     if (error.code === 'P2002') {
       throw new Error("An Order Booker with this code already exists.");

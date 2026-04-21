@@ -51,6 +51,7 @@ export async function uploadStockPdf(formData: FormData) {
     });
 
     revalidatePath("/dashboard");
+    revalidatePath("/");
     return { success: true };
   } catch (error) {
     console.error("Upload error:", error);
